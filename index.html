@@ -1,0 +1,29 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <button id="btn" style="-webkit-appearance: -apple-pay-button;" onclick="applePayButtonClicked()"></button>
+
+    <script>
+        window.addEventListener("message", receiveMessage, false);
+
+        function receiveMessage(event) {
+            console.log(event.data.event);
+            const x = document.getElementById("btn");
+            if(event.data.event) {
+                x.style.display = 'block';
+            } else {
+                x.style.display = 'none';
+            }
+        }
+
+        function applePayButtonClicked(e) {
+            window.parent.postMessage(e, '*');
+        }
+    </script>
+</body>
+</html>
